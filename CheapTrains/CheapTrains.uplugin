@@ -1,0 +1,17 @@
+{
+	"FileVersion": 3,
+	"Version": 2,
+	"VersionName": "2.0.0",
+	"FriendlyName": "Cheap Trains & Drones",
+	"Description": "Cheap Trains & Drones at Tier 1",
+	"Category": "Modding",
+	"CreatedBy": "pacas00",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false
+}
