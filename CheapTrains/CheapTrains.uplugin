@@ -2,6 +2,7 @@
 	"FileVersion": 3,
 	"Version": 2,
 	"VersionName": "2.0.0",
+	"SemVersion": "2.0.0",
 	"FriendlyName": "Cheap Trains & Drones",
 	"Description": "Cheap Trains & Drones at Tier 1",
 	"Category": "Modding",
@@ -13,5 +14,12 @@
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
-	"Installed": false
+	"Installed": false,
+	"Plugins": [
+    {
+      "Name": "SML",
+      "SemVersion": "^3.0.0",
+      "Enabled": true
+    }
+  ]
 }
