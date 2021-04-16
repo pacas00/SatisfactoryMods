@@ -68,7 +68,13 @@ UBlueprintJsonObject* USFSMBPFunctionLibrary::ProcessJsonObject(UBlueprintJsonOb
  {
      TArray<FString> PlayersList;
      for (AFGPlayerController* Controller : GetConnectedPlayers(PlayerController->GetWorld())) {
-         PlayersList.Add(Controller->PlayerState->GetPlayerName());
+     	APlayerState* state = ((Controller->PlayerState));
+        if (state)
+        {
+            //Not Working
+	        PlayersList.Add((state)->GetPlayerName());
+        }
+     	
      }
      return PlayersList;
  }

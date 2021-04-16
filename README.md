@@ -16,4 +16,4 @@ CheapTrains is Cheap Trains and Drones
 
 SFServerManager is the Plugin counterpart to my SFServerManager Panel.
 
-The source of the plugin will live here, Binary builds in the Panel repo. The panel repo is (TODO: PUT LINK HERE)
+The source of the plugin will live here, Binary builds in the Panel repo. The panel repo is (https://github.com/pacas00/SFServerManager)
