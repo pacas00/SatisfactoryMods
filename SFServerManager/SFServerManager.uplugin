@@ -1,0 +1,26 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"SemVersion": "1.0.0",
+	"AcceptsAnyRemoteVersion": true,
+	"FriendlyName": "SFServerManager",
+	"Description": "",
+	"Category": "Modding",
+	"CreatedBy": "PeterCashel",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "SFServerManager",
+			"Type": "Runtime",
+			"LoadingPhase": "PostDefault"
+		}
+	]
+}
