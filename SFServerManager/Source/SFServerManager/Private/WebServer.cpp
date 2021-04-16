@@ -261,6 +261,18 @@ TSharedPtr<FJsonObject> AWebServer::GetRequestJsonBody(const FHttpServerRequest&
 	TArray<uint8> RequestBodyBytes = Request.Body;
 	FString RequestBodyString = FString(UTF8_TO_TCHAR(RequestBodyBytes.GetData()));
 
+	if (RequestBodyString.Contains("}"))
+	{
+		if (!RequestBodyString.EndsWith("}"))
+		{
+			//Ok, The decoding on this seems to be really sloppy. Trim the end.
+			
+			int32 Index;
+			RequestBodyString.FindLastChar('}', Index);
+			RequestBodyString = RequestBodyString.Left(Index + 1);
+		}		
+	}
+
 	// string to json
 	TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(RequestBodyString);
 	TSharedPtr<FJsonObject> RequestBody;
