@@ -50,12 +50,18 @@ public:
      
      UFUNCTION(BlueprintCallable, Category = "SFSM|Player", meta = (WorldContext = WorldContextObject))
      static TArray<AFGPlayerController*> GetAllPlayerControllers(UObject * WorldContextObject);
-     
-     UFUNCTION(BlueprintCallable, Category = "SFSM|Player", meta = (WorldContext = WorldContextObject))
+
+	UFUNCTION(BlueprintCallable, Category = "SFSM|Chat", meta = (WorldContext = WorldContextObject))
+	static void SendSystemChatMessage(UObject* WorldContextObject, FString message);
+
+	UFUNCTION(BlueprintCallable, Category = "SFSM|Player", meta = (WorldContext = WorldContextObject))
      static AFGPlayerController* GetPlayerController(UObject * WorldContextObject, FString PlayerName);
      
      UFUNCTION(BlueprintCallable, Category = "SFSM|Player")
      static APawn* GetPlayerPawn(AFGPlayerController* PlayerController);
+
+	UFUNCTION(BlueprintPure, Category = "SFSM|Server", meta = (WorldContext = "WorldContextObject"))
+	static const FString GetNetworkURL(UObject* WorldContextObject);
 
 	 	/**
       * Retrieves controllers of all connected players in the given world

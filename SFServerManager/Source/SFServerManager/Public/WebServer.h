@@ -81,7 +81,7 @@ public:
  	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "SFSM|Event|StatusMessage") 
 	UBlueprintJsonObject* ProcessStatusMessage(UPARAM(ref) UBlueprintJsonObject*& Input);
 
- 	FString DefaultConfig = "{\"WebServer\":{\"Port\":8033},\"World\":{\"SaveFileName\":\"DedicatedServer\",\"AutoLoadSave\":false,\"AdminPassword\":\"PlumTestChicken\"}}";
+ 	FString DefaultConfig = "{\"ServerList\":{\"Register\":false,\"HasPassword\":false,\"ServerName\":\"A Satisfactory Server\",\"Hostname\":\"SERVER.DOMAIN.NET\"},\"WebServer\":{\"Port\":8033},\"World\":{\"SaveFileName\":\"DedicatedServer\",\"AutoLoadSave\":false,\"GamePassword\":\"\",\"AdminPassword\":\"PlumTestChicken\"}}";
 
  	UPROPERTY(BlueprintReadWrite)
  	UBlueprintJsonObject* Configuration;

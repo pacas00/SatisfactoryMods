@@ -1,10 +1,10 @@
 {
 	"FileVersion": 3,
-	"Version": 2,
-	"VersionName": "2.0.1",
-	"SemVersion": "2.0.1",
-	"FriendlyName": "Cheap Trains & Drones",
-	"Description": "Cheap Trains & Drones at Tier 1",
+	"Version": 3,
+	"VersionName": "3.0.0",
+	"SemVersion": "3.0.0",
+	"FriendlyName": "Progressive Trains & Drones",
+	"Description": "Progressive Trains & Drones. Start Upgrading Today!",
 	"Category": "Modding",
 	"CreatedBy": "pacas00",
 	"CreatedByURL": "",
@@ -18,8 +18,15 @@
 	"Plugins": [
     {
       "Name": "SML",
-      "SemVersion": "^3.0.0",
+      "SemVersion": "^3.2.0",
       "Enabled": true
     }
-  ]
+    ],
+	"Modules": [
+		{
+			"Name": "CheapTrains",
+			"Type": "Runtime",
+			"LoadingPhase": "PostDefault"
+		}
+	]
 }

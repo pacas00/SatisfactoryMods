@@ -50,6 +50,7 @@ void AWebServer::PrepareConfig()
 	
 	UBlueprintJsonObject* config_obj;
 	UBlueprintJsonObject* default_obj;
+	
 	if (!Configuration->HasObject("WebServer"))
 	{
 		DefaultConfiguration->GetObject("WebServer", config_obj);
@@ -91,12 +92,19 @@ void AWebServer::PrepareConfig()
 			default_obj->GetString("AdminPassword", val);
 			config_obj->SetString("AdminPassword", val);
 		}
-		if (!config_obj->HasInteger("SaveFileName"))
+		if (!config_obj->HasString("SaveFileName"))
 		{
 			FString val;
 			default_obj->GetString("SaveFileName", val);
 			config_obj->SetString("SaveFileName", val);
 		}
+		if (!config_obj->HasString("GamePassword"))
+		{
+			FString val;
+			default_obj->GetString("GamePassword", val);
+			config_obj->SetString("GamePassword", val);
+		}
+		
 	}
 
 	//Make key if needed

@@ -98,8 +98,8 @@ bool UBlueprintJsonObject::HasInteger(FString Key) {
 	if (!success)
 		return false;
 
-	double intpart;
-	return std::modf(val, &intpart) == 0.0;
+	double intpart;	
+	return FGenericPlatformMath::Modf(val, &intpart) == 0.0;
 }
 
 bool UBlueprintJsonObject::GetInteger(FString Key, int32& Value) {

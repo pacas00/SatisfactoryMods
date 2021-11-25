@@ -10,26 +10,26 @@
 
 
 
-AFGAdminInterface* USFSMBPFunctionLibrary::GetAdminInterface(UObject * WorldContextObject)
- {
-     UWorld * wp = WorldContextObject->GetWorld();
+AFGAdminInterface* USFSMBPFunctionLibrary::GetAdminInterface(UObject* WorldContextObject)
+{
+	UWorld* wp = WorldContextObject->GetWorld();
 
-     if (wp)
-     {
-         TArray<AActor*> FoundActors;
-         UGameplayStatics::GetAllActorsOfClass(wp, AFGAdminInterface::StaticClass(), FoundActors);
+	if (wp)
+	{
+		TArray<AActor*> FoundActors;
+		UGameplayStatics::GetAllActorsOfClass(wp, AFGAdminInterface::StaticClass(), FoundActors);
 
-         
-         for (AActor* Actor : FoundActors)
-         {
-             if ((*Actor).IsA<AFGAdminInterface>())
-             {
-                 return static_cast<AFGAdminInterface*>(Actor);
-             }
-         }
-     }    
-     return nullptr;
- }
+
+		for (AActor* Actor : FoundActors)
+		{
+			if ((*Actor).IsA<AFGAdminInterface>())
+			{
+				return static_cast<AFGAdminInterface*>(Actor);
+			}
+		}
+	}
+	return nullptr;
+}
 
 
 DEFINE_LOG_CATEGORY(LogSFServerManUtil);
@@ -55,128 +55,161 @@ void USFSMBPFunctionLibrary::Fatal(FString string)
 
 UBlueprintJsonObject* USFSMBPFunctionLibrary::ProcessJsonObject(UBlueprintJsonObject*& Input)
 {
-    //if (RealBPObject.Succeeded())
-    //{
+	//if (RealBPObject.Succeeded())
+	//{
 	   // UFunction* func = RealBPObject.Object->FindFunction(FName(TEXT("Processjsonobject")));
-    //}
+	//}
 
-	
+
 	return Input;
 }
 
- TArray<FString> USFSMBPFunctionLibrary::GetPlayers(const APlayerController* PlayerController)
- {
-     TArray<FString> PlayersList;
-     for (AFGPlayerController* Controller : GetConnectedPlayers(PlayerController->GetWorld())) {
-     	APlayerState* state = ((Controller->PlayerState));
-        if (state)
-        {
-            //Not Working
-	        PlayersList.Add((state)->GetPlayerName());
-        }
-     	
-     }
-     return PlayersList;
- }
+TArray<FString> USFSMBPFunctionLibrary::GetPlayers(const APlayerController* PlayerController)
+{
+	TArray<FString> PlayersList;
+	for (AFGPlayerController* Controller : GetConnectedPlayers(PlayerController->GetWorld())) {
+		APlayerState* state = ((Controller->PlayerState));
+		if (state)
+		{
+			//Not Working
+			PlayersList.Add((state)->GetPlayerName());
+		}
 
- ULocalPlayer* USFSMBPFunctionLibrary::GetFirstLocalPlayerFromController(UObject * WorldContextObject)
- {
-     UWorld * wp = WorldContextObject->GetWorld();
-     if (wp)
-     {
-         //If Dedicated, This needs to be implemented when Dedicated server exist
-         if (UKismetSystemLibrary::IsDedicatedServer(wp))
-         {
-             
-         }
-         else if (UKismetSystemLibrary::IsServer(wp))
-         {
-             ULocalPlayer* LocalPlayer = wp->GetFirstLocalPlayerFromController();
-             if (LocalPlayer)
-             {
-                 return (LocalPlayer);
-             }
+	}
+	return PlayersList;
+}
 
-         }
-     }
-     return nullptr;
- }
+ULocalPlayer* USFSMBPFunctionLibrary::GetFirstLocalPlayerFromController(UObject* WorldContextObject)
+{
+	UWorld* wp = WorldContextObject->GetWorld();
+	if (wp)
+	{
+		//If Dedicated, This needs to be implemented when Dedicated server exist
+		if (UKismetSystemLibrary::IsDedicatedServer(wp))
+		{
 
+		}
+		else if (UKismetSystemLibrary::IsServer(wp))
+		{
+			ULocalPlayer* LocalPlayer = wp->GetFirstLocalPlayerFromController();
+			if (LocalPlayer)
+			{
+				return (LocalPlayer);
+			}
 
- TArray<AFGPlayerController*> USFSMBPFunctionLibrary::GetAllPlayerControllers(UObject * WorldContextObject)
- {
-     TArray<AFGPlayerController*> PlayersList;
-     UWorld * wp = WorldContextObject->GetWorld();
-
-     if (wp)
-     {
-         TArray<AActor*> FoundActors;
-         UGameplayStatics::GetAllActorsOfClass(wp, AFGPlayerController::StaticClass(), FoundActors);
-         for (AActor* Actor : FoundActors)
-         {
-             if ((*Actor).IsA<AFGPlayerController>())
-             {
-                 PlayersList.Add((static_cast<AFGPlayerController*>(Actor)));
-             }
-         }
-         
-         return PlayersList;
-     }
-     
-     return PlayersList;
- }
-
- AFGPlayerController* USFSMBPFunctionLibrary::GetPlayerController(UObject * WorldContextObject, FString PlayerName)
- {
-     UWorld * wp = WorldContextObject->GetWorld();
-
-     if (wp)
-     {
-         TArray<AActor*> FoundActors;
-         UGameplayStatics::GetAllActorsOfClass(wp, AFGPlayerController::StaticClass(), FoundActors);
-         for (AActor* Actor : FoundActors)
-         {
-             if ((*Actor).IsA<AFGPlayerController>())
-             {
-                 AFGPlayerController* Player = (static_cast<AFGPlayerController*>(Actor));
-                 if (Player->PlayerState)
-                 {
-                     
-                     if (Player->PlayerState->GetPlayerName().ToLower() == PlayerName.ToLower())
-                     {
-                         return Player;
-                     }
-                 }
-             }
-         }
-         
-
-     }
-     
-     return nullptr;
- }
-
- APawn* USFSMBPFunctionLibrary::GetPlayerPawn(AFGPlayerController* PlayerController)
- {
-     if (PlayerController)
-     {
-         return PlayerController->GetPawn();
-     }
-     
-     return nullptr;
- }
-
-
- TArray<AFGPlayerController*> USFSMBPFunctionLibrary::GetConnectedPlayers(const UWorld* World) {
- 	TArray<AFGPlayerController*> Result;
- 	//iterate connected players
- 	for (FConstPlayerControllerIterator iterator = World->GetPlayerControllerIterator(); iterator; ++iterator) {
- 		APlayerController* controller = (*iterator).Get();
- 		if (controller == nullptr) continue;
- 		Result.Add(static_cast<AFGPlayerController*>(controller));
- 	}
- 	return Result;
-    
+		}
+	}
+	return nullptr;
 }
 
 
+TArray<AFGPlayerController*> USFSMBPFunctionLibrary::GetAllPlayerControllers(UObject* WorldContextObject)
+{
+	TArray<AFGPlayerController*> PlayersList;
+	UWorld* wp = WorldContextObject->GetWorld();
+
+	if (wp)
+	{
+		TArray<AActor*> FoundActors;
+		UGameplayStatics::GetAllActorsOfClass(wp, AFGPlayerController::StaticClass(), FoundActors);
+		for (AActor* Actor : FoundActors)
+		{
+			if ((*Actor).IsA<AFGPlayerController>())
+			{
+				PlayersList.Add((static_cast<AFGPlayerController*>(Actor)));
+			}
+		}
+
+		return PlayersList;
+	}
+
+	return PlayersList;
+}
+
+void USFSMBPFunctionLibrary::SendSystemChatMessage(UObject* WorldContextObject, FString message)
+{
+	FChatMessageStruct newMessage;
+	newMessage.MessageString = message;
+	newMessage.MessageType = EFGChatMessageType::CMT_SystemMessage;
+	
+	AFGChatManager::Get(WorldContextObject)->Multicast_BroadcastChatMessage(newMessage);	
+}
+
+AFGPlayerController* USFSMBPFunctionLibrary::GetPlayerController(UObject* WorldContextObject, FString PlayerName)
+{
+	UWorld* wp = WorldContextObject->GetWorld();
+
+	if (wp)
+	{
+		TArray<AActor*> FoundActors;
+		UGameplayStatics::GetAllActorsOfClass(wp, AFGPlayerController::StaticClass(), FoundActors);
+		for (AActor* Actor : FoundActors)
+		{
+			if ((*Actor).IsA<AFGPlayerController>())
+			{
+				AFGPlayerController* Player = (static_cast<AFGPlayerController*>(Actor));
+				if (Player->PlayerState)
+				{
+
+					if (Player->PlayerState->GetPlayerName().ToLower() == PlayerName.ToLower())
+					{
+						return Player;
+					}
+				}
+			}
+		}
+
+
+	}
+
+	return nullptr;
+}
+
+APawn* USFSMBPFunctionLibrary::GetPlayerPawn(AFGPlayerController* PlayerController)
+{
+	if (PlayerController)
+	{
+		return PlayerController->GetPawn();
+	}
+
+	return nullptr;
+}
+
+
+TArray<AFGPlayerController*> USFSMBPFunctionLibrary::GetConnectedPlayers(const UWorld* World) {
+	TArray<AFGPlayerController*> Result;
+	//iterate connected players
+	for (FConstPlayerControllerIterator iterator = World->GetPlayerControllerIterator(); iterator; ++iterator) {
+		APlayerController* controller = (*iterator).Get();
+		if (controller == nullptr) continue;
+		Result.Add(static_cast<AFGPlayerController*>(controller));
+	}
+	return Result;
+
+}
+
+const FString USFSMBPFunctionLibrary::GetNetworkURL(UObject* WorldContextObject)
+{
+	if (WorldContextObject)
+	{
+		if (UWorld* World = WorldContextObject->GetWorld())
+		{
+			return World->GetAddressURL();
+		}
+	}
+	return "unknown:7777";
+}
+
+//const FString USFSMBPFunctionLibrary::GetNetworkURL(UObject* WorldContextObject)
+//{
+//	if (WorldContextObject)
+//	{
+//		if (WorldContextObject->GetWorld() )
+//		{
+//			 IOnlineSessionPtr Sessions = IOnlineSubsystem::Get()->GetSessionInterface();
+//		     FOnlineSessionSettings* CurrentSettings = Sessions->GetSessionSettings(GameSessionName);
+//		     int32 MaxConections = CurrentSettings->NumPublicConnections;
+//		}
+//	}
+//	return "unknown:7777";
+//}
