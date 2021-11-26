@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "FGFreightWagon.h"
 #include "FGLocomotive.h"
+#include "FGSchematic.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 
 
@@ -55,6 +56,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CheapTrains|Utils")
 	static void SetCargoSize(AFGBuildableTrainPlatformCargo* cargoPlatform, int32 size, int32 fluidSize);
 
+	UFUNCTION(BlueprintCallable, Category = "CheapTrains|Player", meta = (WorldContext = WorldContextObject))
+	static AFGPlayerController* GetFirstLocalPlayer(UObject * WorldContextObject);
 	
-
+	UFUNCTION(BlueprintCallable, Category = "CheapTrains|RCO", meta = (WorldContext = WorldContextObject))
+	static UFGRemoteCallObject* GetRCO(UObject* WorldContextObject, TSubclassOf<UFGRemoteCallObject> clazz);
 };
