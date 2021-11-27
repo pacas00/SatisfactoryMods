@@ -40,7 +40,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CheapTrains|Utils")
 	static void SetPower(AFGLocomotive* train, float min, float max);
 	UFUNCTION(BlueprintCallable, Category = "CheapTrains|Utils")
-	static void SetCurves(AFGLocomotive* train, FRuntimeFloatCurve Acceleration, FRuntimeFloatCurve Brake);
+	static void SetCurves(AFGLocomotive* train, FRuntimeFloatCurve Acceleration, FRuntimeFloatCurve Brake, FRuntimeFloatCurve Power, float AI_Max_Speed);
 
 	
 	UFUNCTION(BlueprintCallable, Category = "CheapTrains|Utils")

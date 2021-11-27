@@ -11,7 +11,6 @@
 #include "FGSchematicManager.h"
 #include "Buildables/FGBuildableRailroadStation.h"
 #include "Buildables/FGBuildableTrainPlatformCargo.h"
-#include "CheapTrains/Public/UCheapTrainsRCO.h"
 
 
 DEFINE_LOG_CATEGORY(LogCheapTrainsUtil);
@@ -53,10 +52,12 @@ void UCheapTrainsLibrary::SetPower(AFGLocomotive* train, float min, float max)
 	train->mPowerConsumption = FFloatInterval(min, max);
 }
 
-void UCheapTrainsLibrary::SetCurves(AFGLocomotive* train, FRuntimeFloatCurve Acceleration, FRuntimeFloatCurve Brake)
+void UCheapTrainsLibrary::SetCurves(AFGLocomotive* train, FRuntimeFloatCurve Acceleration, FRuntimeFloatCurve Brake, FRuntimeFloatCurve Power, float AI_Max_Speed)
 {
 	train->GetLocomotiveMovementComponent()->mTractiveEffortCurve = Acceleration;
 	train->GetLocomotiveMovementComponent()->mDynamicBrakingEffortCurve = Brake;
+	train->GetLocomotiveMovementComponent()->mRegenerativePowerCurve = Power;
+	train->GetLocomotiveMovementComponent()->mMaxVelocity = AI_Max_Speed;
 }
 
 
