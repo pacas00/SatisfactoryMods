@@ -1,7 +1,6 @@
 # SatisfactoryMods
 This is where my SF mods go.
 If you need to build these, they go in the Plugins folder of the SML 3.0.0 Starter Project.
-#### Note: This plugin DOES NOT require SML to work. 
 
 ## What is SML?
 #### That's the Satisfactory Mod Loader (https://github.com/satisfactorymodding/SatisfactoryModLoader)
@@ -10,11 +9,8 @@ See the link for details.
 
 
 
-
-
 ## Plugins:
 
-* CheapTrains : Cheap Trains and Drones
-* SFServerManager : the Plugin counterpart to my SFServerManager Panel.
+* CheapTrains : Progressive Trains and Drones (NEEDS SML)
+* SFServerManager : the Plugin counterpart to my SFServerManager Panel. (SML Not Required)
 
-The source of the plugin will live here, Binary builds in the Panel repo. The panel repo is (https://github.com/pacas00/SFServerManager)
