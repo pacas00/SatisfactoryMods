@@ -61,4 +61,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "CheapTrains|RCO", meta = (WorldContext = WorldContextObject))
 	static UFGRemoteCallObject* GetRCO(UObject* WorldContextObject, TSubclassOf<UFGRemoteCallObject> clazz);
+
+	UFUNCTION(BlueprintCallable, Category = "CheapTrains|Player", meta = (WorldContext = WorldContextObject))
+	static AFGPlayerController* GetLocalPlayerController(UObject* WorldContextObject);
 };

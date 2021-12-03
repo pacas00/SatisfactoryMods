@@ -94,26 +94,36 @@ void UCheapTrainsLibrary::SetCargoSize(AFGBuildableTrainPlatformCargo* cargoPlat
 	cargoPlatform->mStorageSizeY = size / 8;
 	//Warn(FString::FromInt(cargoPlatform->mFluidStackSizeMultiplier));
 	//Warn(FString::FromInt(fluidSize));
-	//cargoPlatform->mFluidStackSizeMultiplier = fluidSize;
 
-	if (cargoPlatform->mCargoInventoryHandler != nullptr)
+	try
 	{
-		if (cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent() != nullptr)
+		cargoPlatform->mFluidStackSizeMultiplier = fluidSize;
+
+		if (cargoPlatform->mCargoInventoryHandler != nullptr)
 		{
-			if (cargoPlatform->mFreightCargoType == EFreightCargoType::FCT_Liquid)
+			if (cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent() != nullptr)
 			{
-				//cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->Resize(fluidSize);
-				//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->GetSizeLinear()));
-				//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->GetCanBeRearranged()));
-				//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->IsLocked()));
-				//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->mDefaultInventorySize));
-				//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->mInventoryStacks.Num()));
-			}
-			else
-			{
-				cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->Resize(size);
+				if (cargoPlatform->mFreightCargoType == EFreightCargoType::FCT_Liquid)
+				{
+					//Warn("FLUID");
+					//Warn(FString::FromInt(cargoPlatform->mFluidStackSizeMultiplier));
+					//Warn(FString::FromInt(cargoPlatform->mCachedFluidStackSize));
+					//cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->Resize(fluidSize);
+					//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->GetSizeLinear()));
+					//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->GetCanBeRearranged()));
+					//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->IsLocked()));
+					//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->mDefaultInventorySize));
+					//Warn(FString::FromInt(cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->mInventoryStacks.Num()));
+				}
+				else
+				{
+					cargoPlatform->mCargoInventoryHandler->GetActiveInventoryComponent()->Resize(size);
+				}
 			}
 		}
+	} catch (...)
+	{
+		//Protect from crash
 	}
 }
 
@@ -137,12 +147,49 @@ AFGPlayerController* UCheapTrainsLibrary::GetFirstLocalPlayer(UObject* WorldCont
 
 		} else
 		{
-			//Pray
-			APlayerController* LocalPlayer = wp->GetFirstPlayerController();
-			if (LocalPlayer)
+			if (false)
 			{
-				return reinterpret_cast<AFGPlayerController*>(LocalPlayer);
+				//Wrong
+				//Pray
+				APlayerController* LocalPlayer = wp->GetFirstPlayerController();
+				if (LocalPlayer)
+				{
+					return reinterpret_cast<AFGPlayerController*>(LocalPlayer);
+				}				
 			}
+
+			auto PlayerControllerIter = wp->GetPlayerControllerIterator();
+			if (PlayerControllerIter)
+			{
+				while (APlayerController* PlayerController = PlayerControllerIter->Get())
+				{
+					try
+					{
+						if (AFGPlayerControllerBase* v = dynamic_cast<AFGPlayerControllerBase*>(PlayerController))
+						{
+							//Log(v->GetName());
+							if (AFGPlayerController* v2 = dynamic_cast<AFGPlayerController*>(v))
+							{
+								//Log("Yes");
+								if (PlayerController->IsLocalPlayerController())
+								{
+									//Log("YESYES");
+									return reinterpret_cast<AFGPlayerController*>(PlayerController);
+								}
+							}
+							//Log(v->GetName());
+						}
+					} catch (...)
+					{
+						
+					}
+					if (PlayerController->IsLocalPlayerController())
+					{
+						return reinterpret_cast<AFGPlayerController*>(PlayerController);
+					}
+				}
+			}
+
 		}
 	}
 	return nullptr;
@@ -173,6 +220,38 @@ UFGRemoteCallObject* UCheapTrainsLibrary::GetRCO(UObject* WorldContextObject, TS
 						Warn("LOCAL RCO");
 					}
 					return player2->GetRemoteCallObjectOfClass(clazz);
+				}
+			}
+		}
+		else
+		{
+			Warn("NO Controller");
+		}		
+	}
+	else
+	{
+		Warn("NO WORLD");
+	}
+	return nullptr;
+}
+
+AFGPlayerController* UCheapTrainsLibrary::GetLocalPlayerController(UObject* WorldContextObject)
+{
+	if (UWorld* world = WorldContextObject->GetWorld())
+	{
+		if ((world->GetFirstPlayerController()))
+		{
+			if (AFGPlayerController* player = Cast<AFGPlayerController>(world->GetFirstPlayerController()))
+			{
+				return player;
+			}
+			else
+			{
+				Warn("NO Player");
+				Warn(world->GetFirstLocalPlayerFromController()->PlayerController->GetName());
+				if (AFGPlayerController* player2 = Cast<AFGPlayerController>(world->GetFirstLocalPlayerFromController()->PlayerController))
+				{
+					return player2;
 				}
 			}
 		}
