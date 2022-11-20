@@ -45,60 +45,71 @@ void UWiderBuildMenuPatch::PatchBuildMenu()
 
 void UWiderBuildMenuPatch::ApplyPatch(UUserWidget* BuildMenuBrowserWidget) {
 
-	Log(BuildMenuBrowserWidget->GetRootWidget()->GetName()); //Overlay_1
-	//UPanelWidget UCanvasPanel UHorizontalBox UOverlay UScrollBox UWidgetSwitcher
-	
-	//Step 1, Work our way from the build menu into the BuildMenu_Browser
+	try
+	{
+		//For Sanity
 
-	UOverlay* Overlay_1 = Cast<UOverlay>(BuildMenuBrowserWidget->GetRootWidget());
-	UUserWidget* Widget_Window_DarkMode = Cast<UUserWidget>(Overlay_1->GetChildAt(0));
-	UNamedSlot* WindowBody = FReflectionHelper::GetObjectPropertyValue<UNamedSlot>(Widget_Window_DarkMode, TEXT("WindowBody"));
-	UUserWidget* Widget_SlidingTabs = Cast<UUserWidget>(WindowBody->GetContent());	
-	UNamedSlot* mContent = FReflectionHelper::GetObjectPropertyValue<UNamedSlot>(Widget_SlidingTabs, TEXT("mContent"));
-	UHorizontalBox* HorizontalBox_2 = Cast<UHorizontalBox>(mContent->GetContent());	
-	
-	UUserWidget* mBrowser_Builder = Cast<UUserWidget>(HorizontalBox_2->GetChildAt(0)); //Build Menu BPW_BuildMenu_Browser
-	Log(TEXT("6"));
-	Log(mBrowser_Builder->GetName());
+		
+		//Log(BuildMenuBrowserWidget->GetRootWidget()->GetName()); //Overlay_1
+		//UPanelWidget UCanvasPanel UHorizontalBox UOverlay UScrollBox UWidgetSwitcher
+		
+		//Step 1, Work our way from the build menu into the BuildMenu_Browser
 
-	UUserWidget* BPW_Customiser = Cast<UUserWidget>(HorizontalBox_2->GetChildAt(1));
-	Log(TEXT("7"));
-	Log(BPW_Customiser->GetName());
+		UOverlay* Overlay_1 = Cast<UOverlay>(BuildMenuBrowserWidget->GetRootWidget());
+		UUserWidget* Widget_Window_DarkMode = Cast<UUserWidget>(Overlay_1->GetChildAt(0));
+		UNamedSlot* WindowBody = FReflectionHelper::GetObjectPropertyValue<UNamedSlot>(Widget_Window_DarkMode, TEXT("WindowBody"));
+		UUserWidget* Widget_SlidingTabs = Cast<UUserWidget>(WindowBody->GetContent());	
+		UNamedSlot* mContent = FReflectionHelper::GetObjectPropertyValue<UNamedSlot>(Widget_SlidingTabs, TEXT("mContent"));
+		UHorizontalBox* HorizontalBox_2 = Cast<UHorizontalBox>(mContent->GetContent());	
+		
+		UUserWidget* mBrowser_Builder = Cast<UUserWidget>(HorizontalBox_2->GetChildAt(0)); //Build Menu BPW_BuildMenu_Browser
+		//Log(TEXT("6"));
+		//Log(mBrowser_Builder->GetName());
 
-	//Step Two, Get to work on the build menu.
-	UPanelWidget* CanvasPanel_0 = Cast<UPanelWidget>(mBrowser_Builder->GetRootWidget());
-	UUserWidget* Widget_Window_AlternateContentBackground_DarkMode_C_0 = Cast<UUserWidget>(CanvasPanel_0->GetChildAt(0));
-	USizeBox* SizeBox_0 = Cast<USizeBox>(CanvasPanel_0->GetChildAt(1));
-	UHorizontalBox* HorizontalBox_1 = Cast<UHorizontalBox>(CanvasPanel_0->GetChildAt(2));
+		UUserWidget* BPW_Customiser = Cast<UUserWidget>(HorizontalBox_2->GetChildAt(1));
+		//Log(TEXT("7"));
+		//Log(BPW_Customiser->GetName());
 
-	UCanvasPanelSlot* HorizontalBox_1_slot = Cast<UCanvasPanelSlot>(HorizontalBox_1->Slot);
-	HorizontalBox_1_slot->SetPosition(FVector2D(150,0));
+		//Step Two, Get to work on the build menu.
+		UPanelWidget* CanvasPanel_0 = Cast<UPanelWidget>(mBrowser_Builder->GetRootWidget());
+		UUserWidget* Widget_Window_AlternateContentBackground_DarkMode_C_0 = Cast<UUserWidget>(CanvasPanel_0->GetChildAt(0));
+		USizeBox* SizeBox_0 = Cast<USizeBox>(CanvasPanel_0->GetChildAt(1));
+		UHorizontalBox* HorizontalBox_1 = Cast<UHorizontalBox>(CanvasPanel_0->GetChildAt(2));
 
-	UCanvasPanelSlot* SizeBox_0_slot = Cast<UCanvasPanelSlot>(SizeBox_0->Slot);
-	SizeBox_0_slot->SetSize(FVector2D(150, 0));
+		UCanvasPanelSlot* HorizontalBox_1_slot = Cast<UCanvasPanelSlot>(HorizontalBox_1->Slot);
+		HorizontalBox_1_slot->SetPosition(FVector2D(150,0));
 
-	UCanvasPanelSlot* Widget_Window_AlternateContentBackground_DarkMode_C_0_slot = Cast<UCanvasPanelSlot>(Widget_Window_AlternateContentBackground_DarkMode_C_0->Slot);
-	Widget_Window_AlternateContentBackground_DarkMode_C_0_slot->SetSize(FVector2D(150, 0));
+		UCanvasPanelSlot* SizeBox_0_slot = Cast<UCanvasPanelSlot>(SizeBox_0->Slot);
+		SizeBox_0_slot->SetSize(FVector2D(150, 0));
 
-
-	//Step Three. Customiser has a BPW_BuildMenu_Browser too!
-	UPanelWidget* CanvasPanel_Cust = Cast<UPanelWidget>(BPW_Customiser->GetRootWidget());
-	UUserWidget* Cust_bm_browser = Cast<UUserWidget>(CanvasPanel_Cust->GetChildAt(0));
+		UCanvasPanelSlot* Widget_Window_AlternateContentBackground_DarkMode_C_0_slot = Cast<UCanvasPanelSlot>(Widget_Window_AlternateContentBackground_DarkMode_C_0->Slot);
+		Widget_Window_AlternateContentBackground_DarkMode_C_0_slot->SetSize(FVector2D(150, 0));
 
 
-	//Step Four, Do it again!
-	CanvasPanel_0 = Cast<UPanelWidget>(Cust_bm_browser->GetRootWidget());
-	Widget_Window_AlternateContentBackground_DarkMode_C_0 = Cast<UUserWidget>(CanvasPanel_0->GetChildAt(0));
-	SizeBox_0 = Cast<USizeBox>(CanvasPanel_0->GetChildAt(1));
-	HorizontalBox_1 = Cast<UHorizontalBox>(CanvasPanel_0->GetChildAt(2));
+		//Step Three. Customiser has a BPW_BuildMenu_Browser too!
+		UPanelWidget* CanvasPanel_Cust = Cast<UPanelWidget>(BPW_Customiser->GetRootWidget());
+		UUserWidget* Cust_bm_browser = Cast<UUserWidget>(CanvasPanel_Cust->GetChildAt(0));
 
-	HorizontalBox_1_slot = Cast<UCanvasPanelSlot>(HorizontalBox_1->Slot);
-	HorizontalBox_1_slot->SetPosition(FVector2D(150,0));
 
-	SizeBox_0_slot = Cast<UCanvasPanelSlot>(SizeBox_0->Slot);
-	SizeBox_0_slot->SetSize(FVector2D(150, 0));
+		//Step Four, Do it again!
+		CanvasPanel_0 = Cast<UPanelWidget>(Cust_bm_browser->GetRootWidget());
+		Widget_Window_AlternateContentBackground_DarkMode_C_0 = Cast<UUserWidget>(CanvasPanel_0->GetChildAt(0));
+		SizeBox_0 = Cast<USizeBox>(CanvasPanel_0->GetChildAt(1));
+		HorizontalBox_1 = Cast<UHorizontalBox>(CanvasPanel_0->GetChildAt(2));
 
-	Widget_Window_AlternateContentBackground_DarkMode_C_0_slot = Cast<UCanvasPanelSlot>(Widget_Window_AlternateContentBackground_DarkMode_C_0->Slot);
-	Widget_Window_AlternateContentBackground_DarkMode_C_0_slot->SetSize(FVector2D(150, 0));
+		HorizontalBox_1_slot = Cast<UCanvasPanelSlot>(HorizontalBox_1->Slot);
+		HorizontalBox_1_slot->SetPosition(FVector2D(150,0));
+
+		SizeBox_0_slot = Cast<UCanvasPanelSlot>(SizeBox_0->Slot);
+		SizeBox_0_slot->SetSize(FVector2D(150, 0));
+
+		Widget_Window_AlternateContentBackground_DarkMode_C_0_slot = Cast<UCanvasPanelSlot>(Widget_Window_AlternateContentBackground_DarkMode_C_0->Slot);
+		Widget_Window_AlternateContentBackground_DarkMode_C_0_slot->SetSize(FVector2D(150, 0));
+
+		
+	}catch (...)
+	{
+		Log("SOMETHING WENT VERY WRONG AND YOU NEED TO TELL PETERCASHEL ON THE SF MODDING DISCORD IN HELP-USING-MODS");
+	}
 
 }
