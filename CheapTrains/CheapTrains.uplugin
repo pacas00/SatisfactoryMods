@@ -1,8 +1,8 @@
 {
 	"FileVersion": 3,
 	"Version": 3,
-	"VersionName": "3.2.0",
-	"SemVersion": "3.2.0",
+	"VersionName": "3.2.1",
+	"SemVersion": "3.2.1",
 	"FriendlyName": "Progressive Trains & Drones",
 	"Description": "Progressive Trains & Drones. Start Upgrading Today!",
 	"Category": "Modding",
@@ -18,7 +18,7 @@
 	"Plugins": [
     {
       "Name": "SML",
-      "SemVersion": "^3.3.2",
+      "SemVersion": "^3.4.1",
       "Enabled": true
     }
     ],
