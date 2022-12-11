@@ -1,12 +1,13 @@
 {
 	"FileVersion": 3,
+	"SemVersion": "3.3.0",
+	"AcceptsAnyRemoteVersion": false,
 	"Version": 3,
-	"VersionName": "3.2.1",
-	"SemVersion": "3.2.1",
+	"VersionName": "3.3.0",
 	"FriendlyName": "Progressive Trains & Drones",
 	"Description": "Progressive Trains & Drones. Start Upgrading Today!",
 	"Category": "Modding",
-	"CreatedBy": "PeterCashel",
+	"CreatedBy": "PeterCashel, RedFoxMods",
 	"CreatedByURL": "",
 	"DocsURL": "",
 	"MarketplaceURL": "",
@@ -15,18 +16,19 @@
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
 	"Installed": false,
-	"Plugins": [
-    {
-      "Name": "SML",
-      "SemVersion": "^3.4.1",
-      "Enabled": true
-    }
-    ],
 	"Modules": [
 		{
 			"Name": "CheapTrains",
 			"Type": "Runtime",
 			"LoadingPhase": "PostDefault"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "SML",
+			"Enabled": true,
+			"SemVersion": "^3.4.1",
+			"BasePlugin": false
 		}
 	]
 }
