@@ -1,9 +1,9 @@
 {
 	"FileVersion": 3,
-	"SemVersion": "3.3.0",
+	"SemVersion": "3.3.1",
 	"AcceptsAnyRemoteVersion": false,
 	"Version": 3,
-	"VersionName": "3.3.0",
+	"VersionName": "3.3.1",
 	"FriendlyName": "Progressive Trains & Drones",
 	"Description": "Progressive Trains & Drones. Start Upgrading Today!",
 	"Category": "Modding",
